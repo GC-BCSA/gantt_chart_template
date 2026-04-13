@@ -46,12 +46,6 @@ Core Framework Build,Development,Fiona,2024-11-18,2024-12-20,100,Dev Environment
 
 ---
 
-## Date Shifting
-
-At load time, all task dates are shifted so that the point 32% through the total project timeline aligns with the current system date. This makes the sample dataset always appear "in progress" regardless of when the file is opened. To disable this behavior, remove or comment out the date-shifting block at the bottom of the `<script>` tag in `index.html`.
-
----
-
 ## Features
 
 ### Views
