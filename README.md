@@ -6,26 +6,28 @@ A self-contained, zero-dependency Gantt chart application built with plain HTML,
 
 ## Files
 
-| File         | Purpose                                                        |
-|--------------|----------------------------------------------------------------|
-| `index.html` | Application (markup, styles, and all logic in a single file)   |
-| `data.js`    | Project data as an embedded CSV string loaded via script tag   |
-| `data.csv`   | Reference CSV file (not loaded at runtime)                     |
+| File         | Purpose                                                                    |
+|--------------|----------------------------------------------------------------------------|
+| `index.html` | Application (markup, styles, and all logic in a single file)              |
+| `data.js`    | Demo dataset -- a 155-task sample project embedded as a CSV string        |
+| `data.csv`   | Reference copy of the same data in standard CSV format                    |
+
+`data.js` is included for demonstration purposes so the application has something to render out of the box. Replace its contents with your own project data to use the viewer for real work.
 
 ---
 
 ## Quick Start
 
-1. Edit `data.js` to contain your project data (CSV format inside a template literal).
+1. Replace the CSV content in `data.js` with your own project data, or use the included sample as-is.
 2. Open `index.html` in a browser.
 
-No HTTP server is required. The application runs entirely from the `file://` protocol.
+No HTTP server is required. The application runs entirely from the `file://` protocol. Data is loaded via a `<script>` tag, which is not subject to browser CORS restrictions.
 
 ---
 
 ## Data Format
 
-`data.js` exports a single global variable `window.__GANTT_CSV__` containing a CSV string. The first row must be the header. Supported columns:
+`data.js` exports a single global variable `window.__GANTT_CSV__` containing a CSV string inside a template literal. The first row must be the header. Supported columns:
 
 | Column         | Required | Description                                                                              |
 |----------------|----------|------------------------------------------------------------------------------------------|
@@ -43,6 +45,12 @@ Example row:
 ```
 Core Framework Build,Development,Fiona,2024-11-18,2024-12-20,100,Dev Environment Setup,#F44336
 ```
+
+---
+
+## Demo Dataset
+
+The included `data.js` contains a sample project with 155 tasks across 10 groups (Initiation, Requirements, Architecture, Design, Development, Testing, Data Migration, Training, Deployment, Post-Launch, and Documentation), 8 assignees, and a timeline spanning 2024 through 2026. Task dates are automatically shifted at load time so the project always appears partially complete relative to the current date. This shifting only applies to the bundled demo data and can be removed by deleting the date-shifting block at the bottom of the `<script>` tag in `index.html`.
 
 ---
 
@@ -95,7 +103,7 @@ Clicking any task bar or task row opens a side panel showing:
 - **Today line** -- A vertical red line marks the current date on the chart.
 - **Today button** -- Scrolls the chart to center on the current date.
 - **Collapse/Expand** -- Toggle button collapses or expands all task groups at once.
-- **Drag and drop** -- Drop a `.csv` file onto the page to load different data.
+- **Drag and drop** -- Drop a `.csv` file onto the page to load different data at runtime.
 - **Resizable panels** -- Drag the handle between the task list and chart to resize.
 - **Weekend highlighting** -- In Day and Week views, weekend columns have a subtle background tint.
 - **Progress column** -- The progress column in the task list is hidden automatically when no task has progress data.
@@ -116,10 +124,6 @@ Tested in Chromium-based browsers (Chrome, Edge). Should work in Firefox and Saf
 ### Changing the color palette
 
 Edit the `palette` array inside the `loadTasks` function in `index.html`.
-
-### Changing the date shift percentage
-
-Edit the `0.32` value in the date-shifting block at the bottom of the `<script>` tag.
 
 ### Adjusting column widths per view
 
